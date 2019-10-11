@@ -1,0 +1,94 @@
+C51 COMPILER V9.59.0.0   TS                                                                09/18/2018 22:07:28 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TS
+OBJECT MODULE PLACED IN .\Objects\ts.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ts.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ts.lst
+                    -) TABS(2) OBJECT(.\Objects\ts.obj)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          sbit ph1=P1^0;
+   3          sbit ph11=P1^1;
+   4          sbit ph2=P1^2;
+   5          sbit ph22=P1^3;
+   6          sbit ph4=P1^4;
+   7          sbit ph5=P1^5;
+   8          sbit ph6=P1^6;
+   9          sbit ph7=P1^7;
+  10          
+  11          void delay(int d)
+  12          {
+  13   1        unsigned int i,j,t;
+  14   1        for(i=0;i<1000*d;i++)
+  15   1          for(j=0;j<100;j++);
+  16   1      }
+*** WARNING C280 IN LINE 13 OF ts.c: 't': unreferenced local variable
+  17          
+  18          phase1()
+  19          {
+  20   1          ph1=1;
+  21   1          delay(5);
+  22   1          ph5=1;
+  23   1          delay(1);
+  24   1          
+  25   1          
+  26   1      }
+  27          /*phase2()
+  28          {
+  29              ph11=1;
+  30              delay(5);
+  31              ph6=1;
+  32              delay(1);
+  33          }
+  34          phase3()
+  35          {
+  36              ph2=1;
+  37              delay(5);
+  38              ph7=1;
+  39              delay(1);
+  40          }
+  41          phase4()
+  42          {
+  43              ph22=1;
+  44              delay(5);
+  45              ph4=1;
+  46              delay(1);
+  47          }*/
+  48          
+  49          void clear()
+  50          {
+  51   1        ph1=ph11=ph2=ph22=ph4=ph5=ph6=ph7=0;
+  52   1      }
+  53          void main()
+C51 COMPILER V9.59.0.0   TS                                                                09/18/2018 22:07:28 PAGE 2   
+
+  54          {
+  55   1        while(1){
+  56   2          clear();
+  57   2          phase1();
+  58   2          clear();
+  59   2          /*phase2();
+  60   2          clear();
+  61   2          phase3();
+  62   2          clear();
+  63   2          phase4();
+  64   2          clear();*/
+  65   2        }
+  66   1      }
+*** WARNING C290 IN LINE 26 OF ts.c: missing return value
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     91    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

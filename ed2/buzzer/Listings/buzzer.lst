@@ -1,0 +1,83 @@
+C51 COMPILER V9.59.0.0   BUZZER                                                            11/27/2018 22:31:56 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE BUZZER
+OBJECT MODULE PLACED IN .\Objects\buzzer.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE buzzer.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\bu
+                    -zzer.lst) TABS(2) OBJECT(.\Objects\buzzer.obj)
+
+line level    source
+
+   1          /******************************************************************************
+   2           *  File Name : Buzzer                                                        *
+   3           *  Name      : Maurya Sujeet                                                 *
+   4           *  Roll no.  : 17BCS016                                                      *
+   5           *  Project   : To make a Buzzer                                              *
+   6           *  Date      :    November 2018                                              *
+   7           *****************************************************************************/
+   8           /* A Buzzer is connected to portline P0.5. Timer0 is used to generate delay */
+   9           /* to produce a tone. Vary OFF time & ON timer to different tones. */
+  10          
+  11           #include "at89c51xd2.h"
+  12           #define off_time = 14
+  13           #define on_time = 14
+  14          
+  15           sbit buzz = P0^5; // Buzzer is connected to the portline P0.5
+  16          
+  17           idata unsigned int i;
+  18           void main ()
+  19           {
+  20   1      
+  21   1       TMOD = 0x01; // Timer0 is configured in Mode-1,
+  22   1      
+  23   1       TL0 = 0x00; // Load Timer-0 value for 0.7s Delay
+  24   1       TH0 = 0x00;
+  25   1      
+  26   1       TCON = 0x00; // Clearing All Flags
+  27   1       TF0 = 0; // Clear Timesr-0 overflow flag
+  28   1      
+  29   1      
+  30   1       while(1)
+  31   1       {
+  32   2      
+  33   2       buzz = 1; // make P2.4 high i.e. Buzzer ON
+  34   2       for(i=0;i<on_time;i++)
+  35   2       {
+  36   3       TL0 = 0x00; // Reload timer count for 2msec
+  37   3       TH0 = 0x00;
+  38   3       TR0 =1; // Turn ON timer-0
+  39   3       while(!TF0); // Wait untill Timer-0 overfolws
+  40   3       TF0 = 0; // Clear Tiemr-0 overflow flag
+  41   3       TR0=0; // Turn OFF timer-0
+  42   3       }
+  43   2      
+  44   2      
+  45   2       buzz = 0; // make P2.4 low i.e Buzzer OFF
+  46   2       for(i=0;i<off_time;i++)
+  47   2       {
+  48   3       TL0 = 0x00; // Reload timer count for 2msec
+  49   3       TH0 = 0x00;
+  50   3       TR0 =1; // Turn ON timer-0
+  51   3       while(!TF0); // Wait untill Timer-0 overfolws
+  52   3       TF0 = 0; // Clear Tiemr-0 overflow flag
+  53   3       TR0=0; // Turn OFF timer-0
+  54   3       }
+C51 COMPILER V9.59.0.0   BUZZER                                                            11/27/2018 22:31:56 PAGE 2   
+
+  55   2      
+  56   2       }
+  57   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     95    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =      2    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

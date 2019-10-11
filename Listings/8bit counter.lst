@@ -1,0 +1,45 @@
+C51 COMPILER V9.59.0.0   8BIT_COUNTER                                                      09/12/2018 00:26:04 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE 8BIT_COUNTER
+OBJECT MODULE PLACED IN .\Objects\8bit counter.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE 8bit counter.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\8bit counter.lst) TABS(2) OBJECT(.\Objects\8bit counter.obj)
+
+line level    source
+
+   1          //_bit counter
+   2          #include<reg51.h>
+   3          void delay()
+   4          {
+   5   1        unsigned int i,j;
+   6   1        for(i=0;i<10;i++)
+   7   1          for(j=0;j<1000;j++);
+   8   1      }
+   9          
+  10          void main()
+  11          {
+  12   1        unsigned char x=0x01;
+  13   1        while(1)
+  14   1        {
+  15   2          P1=x;
+  16   2          delay();
+  17   2          x=x<<1;
+  18   2          if(x==0x00)
+  19   2            x=0x001;
+  20   2        }
+  21   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     46    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

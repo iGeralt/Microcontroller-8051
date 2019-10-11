@@ -1,0 +1,3 @@
+".\Objects\8bit counter.obj" 
+TO ".\Objects\8 bit counter" 
+PRINT(".\Listings\8 bit counter.m51")

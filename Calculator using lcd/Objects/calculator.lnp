@@ -1,0 +1,3 @@
+".\Objects\calculator.obj" 
+TO ".\Objects\calculator" 
+PRINT(".\Listings\calculator.m51")
