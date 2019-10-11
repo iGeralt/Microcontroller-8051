@@ -1,0 +1,236 @@
+C51 COMPILER V9.59.0.0   CALCULATOR                                                        11/27/2018 19:22:18 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE CALCULATOR
+OBJECT MODULE PLACED IN .\Objects\calculator.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE calculator.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\calculator.lst) TABS(2) OBJECT(.\Objects\calculator.obj)
+
+line level    source
+
+   1          /*****************************************************************************************************
+   2          Name    : Maurya Sujeet
+   3          Roll no.: 17BCS016
+   4          Project : Calculator using lcd and keypad
+   5          Date    : 17/10/2018
+   6          ******************************************************************************************************/
+   7          
+   8          #include<reg51.h> // Includes register definitions for the Intel 8051
+   9          
+  10          /* Configure the data bus and Control pins as per the hardware connection 
+  11             Databus is connected to P2_0:P2_7 and control bus P0_0:P0_2*/
+  12          
+  13          sbit LCD_RS = P1^0;
+  14          sbit LCD_RW = P1^1;
+  15          sbit LCD_EN = P1^2;
+  16          sbit RowA=P3^0;
+  17          sbit RowB=P3^1;
+  18          sbit RowC=P3^2;
+  19          sbit RowD=P3^3;
+  20          sbit C1=P3^4;
+  21          sbit C2=P3^5;
+  22          sbit C3=P3^6;
+  23          sbit C4=P3^7;
+  24          
+  25          /*declaring global variables
+  26          *intialising values of the variables
+  27          */
+  28          char x1='\0',x2='\0',op='\0',x3='\0';
+  29          int count=0, p=0, q=0;
+  30          
+  31          /* local function to generate delay */
+  32          void delay_us(int cnt)
+  33          {
+  34   1          int i;
+  35   1          for(i=0;i<cnt;i++);
+  36   1      }
+  37          
+  38          /* Function to send the command to LCD */
+  39          
+  40          void Lcd_CmdWrite( char cmd)
+  41          {
+  42   1          P2=cmd;             // Send the command to LCD
+  43   1          LCD_RS=0;           // Select the Command Register by pulling RS LOW
+  44   1          LCD_RW=0;           // Select the Write Operation  by pulling RW LOW
+  45   1          LCD_EN=1;           // Send a High-to-Low Pusle at Enable Pin
+  46   1          delay_us(10);       // calling delay function
+  47   1          LCD_EN=0;           //  Send a low to high pulse at enable pin
+  48   1      }
+  49          
+  50          /*function to write data on lcd*/
+  51          
+  52          void Lcd_DataWrite()
+  53          {
+  54   1          LCD_RS=1;           // Select the Data Register by pulling RS HIGH
+C51 COMPILER V9.59.0.0   CALCULATOR                                                        11/27/2018 19:22:18 PAGE 2   
+
+  55   1          LCD_RW=0;           // Select the Write Operation by pulling RW LOW
+  56   1          LCD_EN=1;           // Send a High-to-Low Pusle at Enable Pin
+  57   1          delay_us(10);       // calling delay function
+  58   1          LCD_EN=0;           //  Send a low to high pulse at enable pin
+  59   1      
+  60   1      }
+  61          
+  62          /* Function to send the Data to LCD */
+  63          /*  counters are used to save the values of in different variables*/
+  64          void display( char y)
+  65          {
+  66   1        if(count == 0)         //if count = 0 then value will be stored in first variable
+  67   1        { 
+  68   2          x1=y;
+  69   2          P2 = x1;            //displaying value of first variable on lcd
+  70   2          p = x1 -'0';        //converting value  from ascii format to int
+  71   2          Lcd_DataWrite();    //calling data write function
+  72   2          count ++;           //increasing the counter so that next value is stored in second variable
+  73   2          
+  74   2        }
+  75   1        else if(count == 1)   //to store the operand and display it if count = 1
+  76   1        {
+  77   2          char i,a[]={"Invalid operation"};
+  78   2          if ( op == '/' || op == '*' || op == '-' || op == '+')    //checks which operand is passed by the keypad
+  79   2          {
+  80   3            op = y;                 //assigns the operand to op variable
+  81   3            P2 = op;                //displays the operand on screen
+  82   3            Lcd_DataWrite();        //calling data write function   
+  83   3            count++;                // increasing the counter so that next value is stored in third variable
+  84   3          }
+  85   2          else                      //if value is not an operand then it will display error
+  86   2          {
+  87   3            Lcd_CmdWrite(0xc0);        //Go to Next line and display 
+  88   3            for(i=0;a[i]!=0;i++)      //to display the content of the array a[]
+  89   3            {
+  90   4              y=a[i];
+  91   4              P2=y;                   //displays the content of the array on the screen 
+  92   4              Lcd_DataWrite();        //calling the data write function
+  93   4            }
+  94   3          } 
+  95   2        }
+  96   1        else if(count == 2)           //to store the value of third variable and display it   
+  97   1        {
+  98   2          x2 = y;
+  99   2          P2 = x2;                    //display the value of the third variable on screen 
+ 100   2          q = x2 - '0';               //convert the value of third variable from ascii format to int
+ 101   2          Lcd_DataWrite();            //calling data write function
+ 102   2          count++;                    //increasing the counter 
+ 103   2        } 
+ 104   1        else if(count == 3)           //displays = sign on screen
+ 105   1        {
+ 106   2          P2=y;
+ 107   2          Lcd_DataWrite();
+ 108   2          count++;
+ 109   2        } 
+ 110   1        else if (count == 4)          //displays the answer on the screen
+ 111   1        {
+ 112   2          P2=y;
+ 113   2          Lcd_DataWrite();
+ 114   2        }
+ 115   1      }
+ 116          /*Funtion to do the arithmetic calculation
+C51 COMPILER V9.59.0.0   CALCULATOR                                                        11/27/2018 19:22:18 PAGE 3   
+
+ 117          * '0' is added to int to  convert int to ascii format
+ 118          */
+ 119          void result()
+ 120          {
+ 121   1        int s;
+ 122   1        if(op=='/')             //if op = / ,then division will take place
+ 123   1        { s = p/q;
+ 124   2          x1 = s + '0';         //converting to ascii format
+ 125   2          display(x1);          //calling display function
+ 126   2        }
+ 127   1        else if(op=='+')        //if op = +,then addition will take place
+ 128   1        { s = p+q;
+ 129   2          if(s>9)               //if the number is greater than 9 then number is displayed digit by digit
+ 130   2          {
+ 131   3            x1 = s/10 + '0';    // tens' digit
+ 132   3            display(x1);        // passing ten's digit to display function
+ 133   3            x1 = s%10 + '0';    //unit's digit
+ 134   3            display(x1);        //passing unit's digit to display function
+ 135   3          }
+ 136   2          else                  //if number is not greater than 9 then it will be displayed directly
+ 137   2          {
+ 138   3            x1 = s + '0';
+ 139   3            display(x1);
+ 140   3          }
+ 141   2        }
+ 142   1        else if(op=='-')        // if op = - ,then subtraction will take place
+ 143   1        { s = p-q;
+ 144   2          x1 = s + '0';
+ 145   2          display(x1);
+ 146   2        }
+ 147   1        else if(op=='*')      // if op = *,then multiplication will take place
+ 148   1        { s = p*q;
+ 149   2          if(s>9)             //if value is greater than 9 then value will be displayed digit by digit
+ 150   2          {
+ 151   3            x1 = s/10 + '0';  //tens' digit
+ 152   3            display(x1);      //passing  tens digit to display function
+ 153   3            x1 = s%10 + '0';  //unit's digit
+ 154   3            display(x1);      //passing the units digit
+ 155   3          }
+ 156   2          else                // if it is less than or equal to 9 then it will be displayed directly
+ 157   2          {
+ 158   3            x1 = s + '0';
+ 159   3            display(x1);
+ 160   3          }
+ 161   2        }
+ 162   1          
+ 163   1      }
+ 164          
+ 165          int main()
+ 166          {
+ 167   1          Lcd_CmdWrite(0x38);        // enable 5x7 mode for chars 
+ 168   1          Lcd_CmdWrite(0x0E);        // display OFF, Cursor ON
+ 169   1          Lcd_CmdWrite(0x01);        // Clear display
+ 170   1          Lcd_CmdWrite(0x80);        // Move the cursor to beginning of first line
+ 171   1      
+ 172   1        while(1)
+ 173   1        {
+ 174   2          /*Testing row and column
+ 175   2          *if row and column is equal to 0 ,it means that particluar button is pressed*/
+ 176   2          
+ 177   2          RowA = 0; RowB = 1; RowC = 1; RowD = 1;   //Test Row A
+ 178   2      
+C51 COMPILER V9.59.0.0   CALCULATOR                                                        11/27/2018 19:22:18 PAGE 4   
+
+ 179   2          if (C1 == 0) {while (C1==0); display('7'); }
+ 180   2          if (C2 == 0) {while (C2==0); display('8'); }
+ 181   2          if (C3 == 0) {while (C3==0); display('9'); }
+ 182   2          if (C4 == 0) {while (C4==0); op = '/';display('/'); }
+ 183   2      
+ 184   2          RowA = 1; RowB = 0; RowC = 1; RowD = 1;   //Test Row B
+ 185   2      
+ 186   2          if (C1 == 0) {  while (C1==0); display('4'); }
+ 187   2          if (C2 == 0) {  while (C2==0); display('5'); }
+ 188   2          if (C3 == 0) {  while (C3==0); display('6'); }
+ 189   2          if (C4 == 0) {  while (C4==0);op = '*'; display('*'); }
+ 190   2      
+ 191   2          RowA = 1; RowB = 1; RowC = 0; RowD = 1;   //Test Row C
+ 192   2      
+ 193   2          if (C1 == 0) {  while (C1==0); display('1'); }
+ 194   2          if (C2 == 0) {  while (C2==0); display('2'); }
+ 195   2          if (C3 == 0) {  while (C3==0); display('3'); }
+ 196   2          if (C4 == 0) {  while (C4==0); op = '-';display('-'); }
+ 197   2      
+ 198   2          RowA = 1; RowB = 1; RowC = 1; RowD = 0;   //Test Row D
+ 199   2      
+ 200   2          if (C1 == 0) {  while (C1==0); Lcd_CmdWrite(0x01);x1='\0',x2='\0',op='\0',count=0;x3='\0'; }
+ 201   2          if (C2 == 0) {  while (C2==0); display('0'); }
+ 202   2          if (C3 == 0) {  while (C3==0); display('=');Lcd_CmdWrite(0xc0);result();}
+ 203   2          if (C4 == 0) {  while (C4==0); op = '+';display('+');}
+ 204   2      
+ 205   2        }
+ 206   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    710    ----
+   CONSTANT SIZE    =     18    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10      22
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

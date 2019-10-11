@@ -1,0 +1,105 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    10/02/2018  13:45:24  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\7 segment.obj TO .\Objects\7 segment led PRINT (.\Listings\7 segment led.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\7 segment.obj (7_SEGMENT)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\7 segment led (7_SEGMENT)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         _DATA_GROUP_
+            IDATA   000AH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0052H     UNIT         ?PR?MAIN?7_SEGMENT
+            CODE    0852H     001DH     UNIT         ?PR?DELAY?7_SEGMENT
+            CODE    086FH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\7 segment led (7_SEGMENT)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?7_SEGMENT
+
+?PR?MAIN?7_SEGMENT             0008H    0002H
+  +--> ?PR?DELAY?7_SEGMENT
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\7 segment led (7_SEGMENT)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        7_SEGMENT
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0852H         PUBLIC        delay
+  C:0800H         PUBLIC        main
+  -------         PROC          MAIN
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  10/02/2018  13:45:24  PAGE 2
+
+
+  -------         DO            
+  D:0008H         SYMBOL        x
+  D:0009H         SYMBOL        y
+  -------         ENDDO         
+  C:0800H         LINE#         3
+  C:0800H         LINE#         4
+  C:0800H         LINE#         5
+  C:0805H         LINE#         6
+  C:0812H         LINE#         7
+  C:0812H         LINE#         8
+  C:081AH         LINE#         9
+  C:0822H         LINE#         10
+  C:0825H         LINE#         11
+  C:0833H         LINE#         12
+  C:0833H         LINE#         13
+  C:083BH         LINE#         14
+  C:0843H         LINE#         15
+  C:0846H         LINE#         16
+  C:0849H         LINE#         18
+  C:084DH         LINE#         19
+  C:0851H         LINE#         20
+  -------         ENDPROC       MAIN
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0852H         LINE#         22
+  C:0852H         LINE#         23
+  C:0852H         LINE#         25
+  C:0855H         LINE#         26
+  C:086EH         LINE#         28
+  -------         ENDPROC       DELAY
+  -------         ENDMOD        7_SEGMENT
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 006FH BYTE ( 5%) *
+******************************************************************************
+
+Program Size: data=11.0 xdata=0 code=126
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

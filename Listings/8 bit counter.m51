@@ -1,0 +1,96 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    09/12/2018  00:26:04  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\8bit counter.obj TO .\Objects\8 bit counter PRINT (.\Listings\8 bit counter.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\8bit counter.obj (8BIT_COUNTER)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\8 bit counter (8BIT_COUNTER)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     001DH     UNIT         ?PR?DELAY?8BIT_COUNTER
+            CODE    081DH     0011H     UNIT         ?PR?MAIN?8BIT_COUNTER
+            CODE    082EH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\8 bit counter (8BIT_COUNTER)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?8BIT_COUNTER
+
+?PR?MAIN?8BIT_COUNTER
+  +--> ?PR?DELAY?8BIT_COUNTER
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\8 bit counter (8BIT_COUNTER)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        8BIT_COUNTER
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:0800H         PUBLIC        delay
+  C:081DH         PUBLIC        main
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        i
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/12/2018  00:26:04  PAGE 2
+
+
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         3
+  C:0800H         LINE#         4
+  C:0800H         LINE#         6
+  C:0803H         LINE#         7
+  C:081CH         LINE#         8
+  -------         ENDPROC       DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0003H         SYMBOL        x
+  -------         ENDDO         
+  C:081DH         LINE#         10
+  C:081DH         LINE#         11
+  C:081DH         LINE#         12
+  C:081FH         LINE#         13
+  C:081FH         LINE#         14
+  C:081FH         LINE#         15
+  C:0821H         LINE#         16
+  C:0824H         LINE#         17
+  C:0828H         LINE#         18
+  C:082AH         LINE#         19
+  C:082CH         LINE#         20
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        8BIT_COUNTER
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 002EH BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=61
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

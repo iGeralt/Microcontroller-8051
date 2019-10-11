@@ -1,0 +1,216 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    11/27/2018  18:07:46  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\cal.obj TO .\Objects\cal PRINT (.\Listings\cal.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\cal.obj (CAL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?IMUL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?SIDIV)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\cal (CAL)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0008H     UNIT         ?DT?CAL
+            DATA    0010H     0002H     UNIT         _DATA_GROUP_
+            IDATA   0012H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     012CH     UNIT         ?PR?MAIN?CAL
+            CODE    092CH     009DH     UNIT         ?C?LIB_CODE
+            CODE    09C9H     008FH     UNIT         ?PR?_DISPLAY?CAL
+            CODE    0A58H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0AE4H     005EH     UNIT         ?PR?RESULT?CAL
+            CODE    0B42H     001DH     UNIT         ?PR?DELAY?CAL
+            CODE    0B5FH     000DH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\cal (CAL)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?CAL
+  +--> ?C_INITSEG
+
+?PR?MAIN?CAL                   -----    -----
+  +--> ?PR?DELAY?CAL
+  +--> ?PR?_DISPLAY?CAL
+  +--> ?PR?RESULT?CAL
+
+?PR?_DISPLAY?CAL               0010H    0002H
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/27/2018  18:07:46  PAGE 2
+
+
+?PR?RESULT?CAL                 -----    -----
+  +--> ?PR?_DISPLAY?CAL
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\cal (CAL)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        CAL
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  C:0B42H         PUBLIC        delay
+  C:0AE4H         PUBLIC        result
+  C:0800H         PUBLIC        main
+  D:0008H         PUBLIC        x1
+  D:000AH         PUBLIC        x2
+  D:000CH         PUBLIC        count
+  D:000EH         PUBLIC        q
+  B:00A0H.4       PUBLIC        C1
+  B:00A0H.5       PUBLIC        C2
+  B:00A0H.6       PUBLIC        C3
+  B:00A0H.7       PUBLIC        C4
+  C:09C9H         PUBLIC        _display
+  B:00A0H.0       PUBLIC        RowA
+  B:00A0H.1       PUBLIC        RowB
+  B:00A0H.2       PUBLIC        RowC
+  B:00A0H.3       PUBLIC        RowD
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0B42H         LINE#         23
+  C:0B42H         LINE#         24
+  C:0B42H         LINE#         26
+  C:0B45H         LINE#         27
+  C:0B5EH         LINE#         28
+  -------         ENDPROC       DELAY
+  -------         PROC          _DISPLAY
+  D:0002H         SYMBOL        y
+  -------         DO            
+  D:0010H         SYMBOL        msb
+  -------         ENDDO         
+  C:09C9H         LINE#         33
+  C:09CDH         LINE#         34
+  C:09CDH         LINE#         35
+  C:09D3H         LINE#         36
+  C:09D3H         LINE#         37
+  C:09D7H         LINE#         38
+  C:09DAH         LINE#         39
+  C:09E2H         LINE#         40
+  C:09E3H         LINE#         41
+  C:09EBH         LINE#         42
+  C:09EBH         LINE#         43
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/27/2018  18:07:46  PAGE 3
+
+
+  C:09EFH         LINE#         44
+  C:09F2H         LINE#         45
+  C:09FAH         LINE#         46
+  C:09FBH         LINE#         47
+  C:0A03H         LINE#         48
+  C:0A03H         LINE#         49
+  C:0A07H         LINE#         50
+  C:0A0FH         LINE#         51
+  C:0A1EH         LINE#         52
+  C:0A2DH         LINE#         53
+  C:0A3FH         LINE#         54
+  C:0A4CH         LINE#         55
+  C:0A50H         LINE#         56
+  C:0A52H         LINE#         57
+  C:0A57H         LINE#         59
+  C:0A57H         LINE#         60
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          RESULT
+  -------         DO            
+  D:0082H         SYMBOL        s
+  -------         ENDDO         
+  C:0AE4H         LINE#         62
+  C:0AE4H         LINE#         63
+  C:0AE4H         LINE#         65
+  C:0AECH         LINE#         66
+  C:0AF7H         LINE#         67
+  C:0AF7H         LINE#         68
+  C:0AF9H         LINE#         69
+  C:0B01H         LINE#         70
+  C:0B0BH         LINE#         71
+  C:0B0BH         LINE#         72
+  C:0B0DH         LINE#         73
+  C:0B15H         LINE#         74
+  C:0B22H         LINE#         75
+  C:0B25H         LINE#         76
+  C:0B27H         LINE#         77
+  C:0B2FH         LINE#         78
+  C:0B3EH         LINE#         79
+  C:0B41H         LINE#         80
+  C:0B41H         LINE#         81
+  -------         ENDPROC       RESULT
+  -------         PROC          MAIN
+  C:0800H         LINE#         84
+  C:0800H         LINE#         85
+  C:0800H         LINE#         86
+  C:0803H         LINE#         87
+  C:0803H         LINE#         88
+  C:0803H         LINE#         91
+  C:080BH         LINE#         93
+  C:081BH         LINE#         94
+  C:082BH         LINE#         95
+  C:083BH         LINE#         96
+  C:084AH         LINE#         98
+  C:0852H         LINE#         100
+  C:0862H         LINE#         101
+  C:0872H         LINE#         102
+  C:0882H         LINE#         103
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/27/2018  18:07:46  PAGE 4
+
+
+  C:0891H         LINE#         105
+  C:0899H         LINE#         107
+  C:08A9H         LINE#         108
+  C:08B9H         LINE#         109
+  C:08C9H         LINE#         110
+  C:08D8H         LINE#         112
+  C:08E0H         LINE#         114
+  C:08FCH         LINE#         115
+  C:090BH         LINE#         116
+  C:0917H         LINE#         117
+  C:0929H         LINE#         119
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        CAL
+
+  -------         MODULE        ?C?IMUL
+  C:092CH         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+  -------         MODULE        ?C?SIDIV
+  C:093EH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:0974H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0242H BYTE (28%) *
+******************************************************************************
+
+Program Size: data=19.0 xdata=0 code=879
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

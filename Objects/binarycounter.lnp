@@ -1,0 +1,3 @@
+".\Objects\binarycounter.obj" 
+TO ".\Objects\binarycounter" 
+PRINT(".\Listings\binarycounter.m51")

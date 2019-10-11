@@ -1,0 +1,186 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    11/27/2018  19:58:34  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\Traffic signal.obj TO .\Objects\Trafficsignal PRINT (.\Listings\Trafficsignal.m51)
+>> 
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Traffic signal.obj (TRAFFIC_SIGNAL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\Trafficsignal (TRAFFIC_SIGNAL)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     001FH     UNIT         ?PR?MAIN?TRAFFIC_SIGNAL
+            CODE    081FH     001DH     UNIT         ?PR?DELAY?TRAFFIC_SIGNAL
+            CODE    083CH     0019H     UNIT         ?PR?CLEAR?TRAFFIC_SIGNAL
+            CODE    0855H     0010H     UNIT         ?PR?PHASE1?TRAFFIC_SIGNAL
+            CODE    0865H     0010H     UNIT         ?PR?PHASE2?TRAFFIC_SIGNAL
+            CODE    0875H     0010H     UNIT         ?PR?PHASE3?TRAFFIC_SIGNAL
+            CODE    0885H     0010H     UNIT         ?PR?PHASE4?TRAFFIC_SIGNAL
+            CODE    0895H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Trafficsignal (TRAFFIC_SIGNAL)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TRAFFIC_SIGNAL
+
+?PR?MAIN?TRAFFIC_SIGNAL
+  +--> ?PR?PHASE1?TRAFFIC_SIGNAL
+  +--> ?PR?CLEAR?TRAFFIC_SIGNAL
+  +--> ?PR?PHASE2?TRAFFIC_SIGNAL
+  +--> ?PR?PHASE3?TRAFFIC_SIGNAL
+  +--> ?PR?PHASE4?TRAFFIC_SIGNAL
+
+?PR?PHASE1?TRAFFIC_SIGNAL
+  +--> ?PR?DELAY?TRAFFIC_SIGNAL
+
+?PR?PHASE2?TRAFFIC_SIGNAL
+  +--> ?PR?DELAY?TRAFFIC_SIGNAL
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/27/2018  19:58:34  PAGE 2
+
+
+
+?PR?PHASE3?TRAFFIC_SIGNAL
+  +--> ?PR?DELAY?TRAFFIC_SIGNAL
+
+?PR?PHASE4?TRAFFIC_SIGNAL
+  +--> ?PR?DELAY?TRAFFIC_SIGNAL
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Trafficsignal (TRAFFIC_SIGNAL)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TRAFFIC_SIGNAL
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  B:0090H.0       PUBLIC        R1
+  B:0090H.3       PUBLIC        R2
+  B:0090H.6       PUBLIC        R3
+  B:00A0H.1       PUBLIC        R4
+  C:083CH         PUBLIC        clear
+  B:0090H.1       PUBLIC        Y1
+  B:0090H.4       PUBLIC        Y2
+  B:0090H.7       PUBLIC        Y3
+  B:00A0H.2       PUBLIC        Y4
+  C:081FH         PUBLIC        delay
+  C:0800H         PUBLIC        main
+  C:0855H         PUBLIC        phase1
+  C:0865H         PUBLIC        phase2
+  C:0875H         PUBLIC        phase3
+  C:0885H         PUBLIC        phase4
+  B:0090H.2       PUBLIC        G1
+  B:0090H.5       PUBLIC        G2
+  B:00A0H.0       PUBLIC        G3
+  B:00A0H.3       PUBLIC        G4
+  -------         PROC          DELAY
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:081FH         LINE#         27
+  C:081FH         LINE#         28
+  C:081FH         LINE#         30
+  C:0822H         LINE#         31
+  C:083BH         LINE#         32
+  -------         ENDPROC       DELAY
+  -------         PROC          CLEAR
+  C:083CH         LINE#         35
+  C:083CH         LINE#         36
+  C:083CH         LINE#         37
+  C:0844H         LINE#         38
+  C:084CH         LINE#         39
+  C:0854H         LINE#         40
+  -------         ENDPROC       CLEAR
+  -------         PROC          PHASE1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/27/2018  19:58:34  PAGE 3
+
+
+  C:0855H         LINE#         45
+  C:0855H         LINE#         46
+  C:0855H         LINE#         47
+  C:0857H         LINE#         48
+  C:0859H         LINE#         49
+  C:085BH         LINE#         50
+  C:085DH         LINE#         51
+  C:0860H         LINE#         52
+  C:0862H         LINE#         53
+  -------         ENDPROC       PHASE1
+  -------         PROC          PHASE2
+  C:0865H         LINE#         58
+  C:0865H         LINE#         59
+  C:0865H         LINE#         60
+  C:086DH         LINE#         61
+  C:0870H         LINE#         62
+  C:0872H         LINE#         63
+  -------         ENDPROC       PHASE2
+  -------         PROC          PHASE3
+  C:0875H         LINE#         68
+  C:0875H         LINE#         69
+  C:0875H         LINE#         70
+  C:087DH         LINE#         71
+  C:0880H         LINE#         72
+  C:0882H         LINE#         73
+  -------         ENDPROC       PHASE3
+  -------         PROC          PHASE4
+  C:0885H         LINE#         78
+  C:0885H         LINE#         79
+  C:0885H         LINE#         80
+  C:088DH         LINE#         81
+  C:0890H         LINE#         82
+  C:0892H         LINE#         83
+  -------         ENDPROC       PHASE4
+  -------         PROC          MAIN
+  C:0800H         LINE#         86
+  C:0800H         LINE#         87
+  C:0800H         LINE#         89
+  C:0803H         LINE#         90
+  C:0805H         LINE#         91
+  C:0805H         LINE#         92
+  C:0805H         LINE#         93
+  C:0808H         LINE#         94
+  C:080BH         LINE#         95
+  C:080EH         LINE#         96
+  C:0811H         LINE#         97
+  C:0814H         LINE#         98
+  C:0817H         LINE#         99
+  C:081AH         LINE#         100
+  C:081DH         LINE#         101
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TRAFFIC_SIGNAL
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0095H BYTE ( 7%) *
+******************************************************************************
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/27/2018  19:58:34  PAGE 4
+
+
+Program Size: data=9.0 xdata=0 code=164
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
